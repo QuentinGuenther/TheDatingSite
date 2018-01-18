@@ -1,0 +1,12 @@
+{
+	"name": "qguenthe/TheDatingSite",
+	"authors": [
+		{
+			"name":"Quentin Guenther",
+			"email":"qguenther@mail.greenriver.edu"
+		}
+	],
+	"require":{
+		"bcosca/fatfree-core":"dev-master"
+	}
+}
