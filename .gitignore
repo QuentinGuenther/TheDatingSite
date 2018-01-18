@@ -1,2 +1,4 @@
 *.phpproj
 vendor/
+.vs/
+tmp/
