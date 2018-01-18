@@ -18,7 +18,7 @@
     $f3->route('GET /',
         function(){
             $template = new Template();
-            echo $template->render('views/home.html');
+            echo $template->render('pages/home.html');
         });
 
     // Run fat-free
