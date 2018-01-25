@@ -15,12 +15,62 @@
 </head>
 <body>
     <nav class="navbar navbar-light mb-2">
-        <a class="navbar-brand" href="#"><strong>My Dating Website</strong></a>
+        <a class="navbar-brand" href="/"><strong>My Dating Website</strong></a>
     </nav>
     <div class="container">
         <div class="row">
-            
+            <div class="col">
+                <h1>Personal Information</h1>
+                <hr />
+            </div>
         </div> <!-- row -->
+        <form class="row" action="/" method="post">
+            <div class="col-md-8">
+                <!-- First Name -->
+                <div class="form-group">
+                    <label for="firstName"><strong>First Name</strong></label>
+                    <input type="text" class="form-control" name="firstName" id="firstName" />
+                </div> <!-- /First Name -->
+                <!-- Last Name -->
+                <div class="form-group">
+                    <label for="LastName"><strong>Last Name</strong></label>
+                    <input type="text" class="form-control" name="lastName" id="lastName" />
+                </div> <!-- /Last Name -->
+                <!-- Age -->
+                <div class="form-group">
+                    <label for="age"><strong>Age</strong></label>
+                    <input type="number" class="form-control" name="age" id="age" />
+                </div> <!-- /Age -->
+                <!-- Gender -->
+                <div class="form-group">
+                    <label><strong>Gender</strong></label>
+                    <br />
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="gender" id="male" value="male" />
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="gender" id="female" value="female" />
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                </div> <!-- /Gender -->
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="phoneNumber"><strong>Phone Number</strong></label>
+                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" />
+                </div> <!-- /Phone Number -->
+
+            </div>
+            <div class="col-md-4">
+                <div class="info-box text-center">
+                    <p><strong>Note:</strong> All information is protected by out <a href="#">Privacy Policy</a>. Profile information can only be viewed by others with your permission.</p>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary float-right">Next ></button>
+            </div>
+        </form>
+        <hr />
     </div>
 
     <!-- Bootstrap Javascrpts -->
