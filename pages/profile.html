@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>The Dating Website - Sign Up</title>
+
+    <!-- Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+
+    <link href="styles/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-light mb-2">
+        <a class="navbar-brand" href="/"><strong>My Dating Website</strong></a>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Profile</h1>
+                <hr />
+            </div>
+        </div> <!-- row -->
+        <form class="row" action="/" method="post">
+            <div class="col-md-6">
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email"><strong>Email</strong></label>
+                    <input type="email" class="form-control" name="email" id="email" />
+                </div> <!-- /Email -->
+                <!-- State -->
+                <div class="form-group">
+                    <label for="state"><strong>State</strong></label>
+                    <select class="form-control" name="state" id="state">
+                        <option selected>Choose...</option>
+                        <option>Washington</option>
+                    </select>
+                </div> <!-- /State -->
+                <!-- Seeking Gender -->
+                <div class="form-group">
+                    <label><strong>Seeking</strong></label>
+                    <br />
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="seekingGender" id="male" value="male" />
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="seekingGender" id="female" value="female" />
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                </div>
+            </div> <!-- /Seeking Gender -->
+            <div class="col-md-6">
+                <!-- Biography -->
+                <div class="form-group">
+                    <label for="biography"><strong>Biography</strong></label>
+                    <textarea class="form-control" name="biography" id="biography" rows="6"></textarea>
+                </div> <!-- /Biography -->
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary float-right">Next ></button>
+            </div>
+        </form>
+        <hr />
+    </div>
+
+    <!-- Bootstrap Javascrpts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+</body>
+</html>
