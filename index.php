@@ -23,9 +23,19 @@
 
     // Sign up route
     $f3->route('GET /signup',
-       function(){
+       function($f3){
+
+            $f3->set('indoor', array('tv', 'puzzles', 'movies', 'reading', 'cooking', 'playing cards', 'board games', 'video games'));
+            $f3->set('outdoor', array('hiking', 'walking', 'biking', 'climbing', 'swimming', 'collecting'));
+
+            $template = new Template();
+            echo $template->render('pages/interests.html');
+       });
+
+    $f3->route('GET /profile',
+       function($f3){
            $template = new Template();
-           echo $template->render('pages/personal_information.html');
+           echo $template->render('pages/profile_summary.html');
        });
 
     // Error page
