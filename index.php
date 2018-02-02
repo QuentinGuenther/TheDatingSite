@@ -70,7 +70,12 @@
             $f3->set('state', $state);
             $f3->set('seekingGender', $seekingGender);
             $f3->set('biography', $biography);
-            
+
+            $_SESSION['email'] = $email;
+            $_SESSION['state'] = $state;
+            $_SESSION['seekingGender'] = $seekingGender;
+            $_SESSION['biography'] = $biography;
+
             $f3->reroute('/signup/interests');
         }
        
@@ -86,14 +91,20 @@
 
             $errors = array();
 
-            if(!validIndoor($outdoor)) { $errors['indoor'] = 'All of your indoor intrests could not be found.'; }
-            if(!validOutdoor($outdoor)) { $errors['outdoor'] = 'All of your outdoor intrests could not be found.'; }
+            if(!validIndoor($indoor)) { $errors['indoor'] = 'All of your indoor intrests could not be found.'; }
+            //if(!validOutdoor($outdoor)) { $errors['outdoor'] = 'All of your outdoor intrests could not be found.'; }
 
-            $errors = array_filter($errors);
-            if(empty($errors)) { $f3->reroute('/profile'); }
+            //$errors = array_filter($errors);
+            if(empty($errors)) { 
+                $_SESSION['indoor'] = $indoor;
+                $_SESSION['outdoor'] = $outdoor;
+
+                $f3->reroute('/profile'); 
+            }
 
             $f3->set('setIndoorIntrests', $indoor);
             $f3->set('setOutdoorIntrests', $outdoor);
+            $f3->set('errors', $errors);
         }
 
         echo Template::instance()->render('pages/interests.html');

@@ -28,14 +28,21 @@
             <div class="col-md-6">
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Name: {{ $_SESSION['firstName'] }}</li>
-                        <li class="list-group-item">Gender: </li>
-                        <li class="list-group-item">Age: </li>
-                        <li class="list-group-item">Phone: </li>
-                        <li class="list-group-item">Email: </li>
-                        <li class="list-group-item">State: </li>
-                        <li class="list-group-item">Seeking: </li>
-                        <li class="list-group-item">Intrests: </li>
+                        <li class="list-group-item">Name: {{ $_SESSION['firstName'] }} {{ $_SESSION['lastName'] }}</li>
+                        <li class="list-group-item">Gender: {{ $_SESSION['gender'] }}</li>
+                        <li class="list-group-item">Age: {{ $_SESSION['age'] }}</li>
+                        <li class="list-group-item">Phone: {{ $_SESSION['phoneNumber'] }}</li>
+                        <li class="list-group-item">Email: {{ $_SESSION['email'] }}</li>
+                        <li class="list-group-item">State: {{ $_SESSION['state'] }}</li>
+                        <li class="list-group-item">Seeking: {{ $_SESSION['seekingGender'] }}</li>
+                        <li class="list-group-item">
+                            <span>Intrests:</span>
+                            <span>
+                                <repeat group="{{ $_SESSION['indoor'] }}" key="{{ @key }}" value="{{ @value }}">
+                                    {{ @value }}
+                                </repeat>
+                            </span>
+                        </li>
                     </ul>
                 </div> <!-- /Card -->
             </div> <!-- /col -->

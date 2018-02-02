@@ -91,7 +91,7 @@
 	{
         if(isset($intrests)) {
             foreach ($intrests as $key => $value) {
-                if(in_array($value, (array)$indoorIntrests)) {
+                if(!in_array($value, (array)$outdoorIntrests)) {
                     return false;
                 }
             }
@@ -102,11 +102,11 @@
 
 	function validIndoor($intrests)
 	{
-        if(isset($intrests) && !empty($intrests)) {
-            foreach ($intrests as $key => $value) {
-                if(in_array($value, (array)$outdoorIntrests)) {
-                    return false;
-                }
+        $indoorIntrests = array('tv', 'puzzles', 'movies', 'reading', 'cooking', 'playing cards', 'board games', 'video games');
+        if(!empty($intrests)) {
+            if(count(array_intersect((array)$indoorIntrests, (array)$indoorIntrests)) != count((array)$intrests)) {
+                echo "<pre>".count((array)$indoorIntrests)."</pre>";
+                return false;
             }
         }
 

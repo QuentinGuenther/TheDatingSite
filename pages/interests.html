@@ -22,13 +22,14 @@
             <div class="col">
                 <h1>Interests</h1>
                 <hr />
+                <p>{{print_r(@setIndoorIntrests)}}</p>
             </div>
         </div> <!-- row -->
         <form class="row" action="#" method="POST">
             <div class="col-12">
                 <h3>In-door Interests</h3>
                 <div class="form-group">
-                    <repeat group="{{ $indoorIntrests }}" value="{{ @intrest }}">
+                    <repeat group="{{ @indoorIntrests }}" value="{{ @intrest }}">
                         <div class="col-md-3 col-lg-3 d-inline-block">
                             <check if="{{ isset(@setIndoorIntrests) }}">
                                 <true>
@@ -42,7 +43,7 @@
                                     </check>
                                 </true>
                                 <false>
-                                    <input type="checkbox" class="form-check-input" name="indoor[]" id="{{ @intrest }}">
+                                    <input type="checkbox" class="form-check-input" name="indoor[]" id="{{ @intrest }}" value="{{ @intrest }}">
                                 </false>
                             </check>
                             <label class="form-check-label" for="{{ @intrest }}">{{ @intrest }}</label>
@@ -58,7 +59,7 @@
             <div class="col-12">
                 <h3>Out-door Interests</h3>
                 <div class="form-group">
-                    <repeat group="{{ $outdoorIntrests }}" value="{{ @intrest }}">
+                    <repeat group="{{ @outdoorIntrests }}" value="{{ @intrest }}">
                         <div class="col-md-3 col-lg-3 d-inline-block">
                             <check if="{{ isset(@setOutdoorIntrests) }}">
                                 <true>
@@ -72,7 +73,7 @@
                                     </check>
                                 </true>
                                 <false>
-                                    <input type="checkbox" class="form-check-input" name="indoor[]" id="{{ @intrest }}">
+                                    <input type="checkbox" class="form-check-input" name="outdoor[]" id="{{ @intrest }}" value="{{ @intrest }}">
                                 </false>
                             </check>
                             <label class="form-check-label" for="{{ @intrest }}">{{ @intrest }}</label>
