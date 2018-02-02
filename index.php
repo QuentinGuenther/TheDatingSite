@@ -92,7 +92,7 @@
             $errors = array();
 
             if(!validIndoor($indoor)) { $errors['indoor'] = 'All of your indoor intrests could not be found.'; }
-            //if(!validOutdoor($outdoor)) { $errors['outdoor'] = 'All of your outdoor intrests could not be found.'; }
+            if(!validOutdoor($outdoor)) { $errors['outdoor'] = 'All of your outdoor intrests could not be found.'; }
 
             //$errors = array_filter($errors);
             if(empty($errors)) { 

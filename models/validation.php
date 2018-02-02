@@ -89,9 +89,10 @@
 
 	function validOutdoor($intrests)
 	{
+        $outdoorIntrests = array('hiking', 'walking', 'biking', 'climbing', 'swimming', 'collecting');
         if(isset($intrests)) {
             foreach ($intrests as $key => $value) {
-                if(!in_array($value, (array)$outdoorIntrests)) {
+                if(!in_array(trim($value), (array)$outdoorIntrests)) {
                     return false;
                 }
             }
@@ -103,10 +104,11 @@
 	function validIndoor($intrests)
 	{
         $indoorIntrests = array('tv', 'puzzles', 'movies', 'reading', 'cooking', 'playing cards', 'board games', 'video games');
-        if(!empty($intrests)) {
-            if(count(array_intersect((array)$indoorIntrests, (array)$indoorIntrests)) != count((array)$intrests)) {
-                echo "<pre>".count((array)$indoorIntrests)."</pre>";
-                return false;
+        if(isset($intrests)) {
+            foreach ($intrests as $key => $value) {
+                if(!in_array(trim($value), (array)$indoorIntrests)) {
+                    return false;
+                }
             }
         }
 
