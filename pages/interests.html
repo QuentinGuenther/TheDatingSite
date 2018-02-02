@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required meta tags -->
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
 
-    <link href="styles/styles.css" rel="stylesheet" />
+    <link href="../styles/styles.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-light mb-2">
@@ -24,31 +24,69 @@
                 <hr />
             </div>
         </div> <!-- row -->
-        <form class="row" action="/" method="post">
+        <form class="row" action="#" method="POST">
             <div class="col-12">
                 <h3>In-door Interests</h3>
                 <div class="form-group">
-                    <repeat group="{{ @indoor }}" value="{{ @intrest }}">
+                    <repeat group="{{ $indoorIntrests }}" value="{{ @intrest }}">
                         <div class="col-md-3 col-lg-3 d-inline-block">
-                            <input type="checkbox" class="form-check-input" name="indoor[]" id="{{ @intrest }}">
+                            <check if="{{ isset(@setIndoorIntrests) }}">
+                                <true>
+                                    <check if="{{ in_array(@intrest, @setIndoorIntrests) }}">
+                                        <true>
+                                            <input type="checkbox" class="form-check-input" name="indoor[]" id="{{ @intrest }}" value="{{ @intrest }}" checked>
+                                        </true>
+                                        <false>
+                                            <input type="checkbox" class="form-check-input" name="indoor[]" id="{{ @intrest }}" value="{{ @intrest }}">
+                                        </false>
+                                    </check>
+                                </true>
+                                <false>
+                                    <input type="checkbox" class="form-check-input" name="indoor[]" id="{{ @intrest }}">
+                                </false>
+                            </check>
                             <label class="form-check-label" for="{{ @intrest }}">{{ @intrest }}</label>
                         </div>
                     </repeat>
                 </div>
+                <check if="{{ @errors['indoor'] }}">
+                    <div class="invalid-input">
+                        <p>{{ @errors['indoor'] }}</p>
+                    </div>
+                </check>
             </div>
             <div class="col-12">
                 <h3>Out-door Interests</h3>
                 <div class="form-group">
-                    <repeat group="{{ @outdoor }}" value="{{ @intrest }}">
+                    <repeat group="{{ $outdoorIntrests }}" value="{{ @intrest }}">
                         <div class="col-md-3 col-lg-3 d-inline-block">
-                            <input type="checkbox" class="form-check-input" name="outdoor[]" id="{{ @intrest }}">
+                            <check if="{{ isset(@setOutdoorIntrests) }}">
+                                <true>
+                                    <check if="{{ in_array(@intrest, @setOutdoorIntrests) }}">
+                                        <true>
+                                            <input type="checkbox" class="form-check-input" name="outdoor[]" id="{{ @intrest }}" value="{{ @intrest }}" checked>
+                                        </true>
+                                        <false>
+                                            <input type="checkbox" class="form-check-input" name="outdoor[]" id="{{ @intrest }}" value="{{ @intrest }}">
+                                        </false>
+                                    </check>
+                                </true>
+                                <false>
+                                    <input type="checkbox" class="form-check-input" name="indoor[]" id="{{ @intrest }}">
+                                </false>
+                            </check>
                             <label class="form-check-label" for="{{ @intrest }}">{{ @intrest }}</label>
                         </div>
                     </repeat>
                 </div>
+                <check if="{{ @errors['outdoor'] }}">
+                    <div class="invalid-input">
+                        <p>{{ @errors['outdoor'] }}</p>
+                    </div>
+                </check>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary float-right">Next ></button>
+                <button type="submit" name="submit" id="submit" class="btn btn-primary float-right">Next ></button>
             </div>
         </form>
         <hr />

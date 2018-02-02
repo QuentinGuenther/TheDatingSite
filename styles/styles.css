@@ -13,3 +13,9 @@ nav {
     padding: 5px;
     margin: 1em 0;
 }
+
+.invalid-input {
+	color: #e50000;
+	font-style: italic;
+	font-size: 0.85rem;
+}

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
 
-    <link href="styles/styles.css" rel="stylesheet" />
+    <link href="../styles/styles.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-light mb-2">
@@ -24,40 +24,74 @@
                 <hr />
             </div>
         </div> <!-- row -->
-        <form class="row" action="/" method="post">
+        <form class="row" action="#" method="POST">
             <div class="col-md-8">
                 <!-- First Name -->
                 <div class="form-group">
                     <label for="firstName"><strong>First Name</strong></label>
-                    <input type="text" class="form-control" name="firstName" id="firstName" />
+                    <input type="text" class="form-control" name="firstName" id="firstName" value="{{ @firstName }}" />
+                    <check if="{{ @errors['firstName'] }}">
+                        <div class="invalid-input">
+                            <p>{{ @errors['firstName'] }}</p>
+                        </div>
+                    </check>
                 </div> <!-- /First Name -->
                 <!-- Last Name -->
                 <div class="form-group">
                     <label for="LastName"><strong>Last Name</strong></label>
-                    <input type="text" class="form-control" name="lastName" id="lastName" />
+                    <input type="text" class="form-control" name="lastName" id="lastName" value="{{ @lastName }}" />
+                    <check if="{{ @errors['lastName'] }}">
+                        <div class="invalid-input">
+                            <p>{{ @errors['lastName'] }}</p>
+                        </div>
+                    </check>
                 </div> <!-- /Last Name -->
                 <!-- Age -->
                 <div class="form-group">
                     <label for="age"><strong>Age</strong></label>
-                    <input type="number" class="form-control" name="age" id="age" />
+                    <input type="number" class="form-control" name="age" id="age" value="{{ @age }}" />
+                    <check if="{{ @errors['age'] }}">
+                        <div class="invalid-input">
+                            <p>{{ @errors['age'] }}</p>
+                        </div>
+                    </check>
                 </div> <!-- /Age -->
                 <!-- Gender -->
                 <div class="form-group">
                     <label><strong>Gender</strong></label>
                     <br />
                     <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" name="gender" id="male" value="male" />
+                        <check if="{{ @gender == 'male' }}">
+                            <true>
+                                <input type="radio" class="form-check-input" name="gender" id="male" value="male" checked />
+                            </true>
+                            <false>
+                                <input type="radio" class="form-check-input" name="gender" id="male" value="male" />
+                            </false>
+                        </check>
                         <label class="form-check-label" for="male">Male</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" name="gender" id="female" value="female" />
+                        <check if="{{ @gender == 'female' }}">
+                            <true>
+                                <input type="radio" class="form-check-input" name="gender" id="female" value="female" checked />
+                            </true>
+                            <false>
+                                <input type="radio" class="form-check-input" name="gender" id="female" value="female" />
+                            </false>
+                        </check>
                         <label class="form-check-label" for="female">Female</label>
                     </div>
                 </div> <!-- /Gender -->
                 <!-- Phone Number -->
                 <div class="form-group">
                     <label for="phoneNumber"><strong>Phone Number</strong></label>
-                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" />
+                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" value="{{ @phoneNumber }}" />
+                    <check if="{{ @errors['phoneNumber'] }}">
+                        <div class="invalid-input">
+                            <p>{{ @errors['phoneNumber'] }}</p>
+                        </div>
+                    </check>
                 </div> <!-- /Phone Number -->
 
             </div>
@@ -67,7 +101,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary float-right">Next ></button>
+                <button type="submit" name="submit" class="btn btn-primary float-right">Next ></button>
             </div>
         </form>
         <hr />

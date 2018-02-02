@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
 
-    <link href="styles/styles.css" rel="stylesheet" />
+    <link href="../styles/styles.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-light mb-2">
@@ -24,19 +24,28 @@
                 <hr />
             </div>
         </div> <!-- row -->
-        <form class="row" action="/" method="post">
+        <form class="row" action="#" method="POST">
             <div class="col-md-6">
                 <!-- Email -->
                 <div class="form-group">
                     <label for="email"><strong>Email</strong></label>
-                    <input type="email" class="form-control" name="email" id="email" />
+                    <input type="email" class="form-control" name="email" id="email" value="{{ @email }}" />
                 </div> <!-- /Email -->
                 <!-- State -->
                 <div class="form-group">
                     <label for="state"><strong>State</strong></label>
                     <select class="form-control" name="state" id="state">
-                        <option selected>Choose...</option>
-                        <option>Washington</option>
+                        <option>--Select--</option>
+                        <repeat group="{{ @stateList }}" value="{{ @stateOption }}">
+                            <check if="{{ @stateOption == @state }}">
+                                <true>
+                                    <option value="{{ @stateOption }}" selected>{{ @stateOption }}</option>
+                                </true>
+                                <false>
+                                    <option value="{{ @stateOption }}">{{ @stateOption }}</option>
+                                </false>
+                            </check>
+                        </repeat>
                     </select>
                 </div> <!-- /State -->
                 <!-- Seeking Gender -->
@@ -44,11 +53,25 @@
                     <label><strong>Seeking</strong></label>
                     <br />
                     <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" name="seekingGender" id="male" value="male" />
+                        <check if="{{ @seekingGender == 'male' }}">
+                            <true>
+                                <input type="radio" class="form-check-input" name="seekingGender" id="male" value="male" checked />
+                            </true>
+                            <false>
+                                <input type="radio" class="form-check-input" name="seekingGender" id="male" value="male" />
+                            </false>
+                        </check>
                         <label class="form-check-label" for="male">Male</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" name="seekingGender" id="female" value="female" />
+                        <check if="{{ @seekingGender == 'female' }}">
+                            <true>
+                                <input type="radio" class="form-check-input" name="seekingGender" id="female" value="female" checked />
+                            </true>
+                            <false>
+                                <input type="radio" class="form-check-input" name="seekingGender" id="female" value="female" />
+                            </false>
+                        </check>
                         <label class="form-check-label" for="female">Female</label>
                     </div>
                 </div>
@@ -57,11 +80,11 @@
                 <!-- Biography -->
                 <div class="form-group">
                     <label for="biography"><strong>Biography</strong></label>
-                    <textarea class="form-control" name="biography" id="biography" rows="6"></textarea>
+                    <textarea class="form-control" name="biography" id="biography" rows="6">{{ @biography }}</textarea>
                 </div> <!-- /Biography -->
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary float-right">Next ></button>
+                <button type="submit" name="submit" class="btn btn-primary float-right">Next ></button>
             </div>
         </form>
         <hr />
