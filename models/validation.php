@@ -70,23 +70,47 @@
     $f3->set('indoorIntrests', $indoorIntrests);
     $f3->set('outdoorIntrests', $outdoorIntrests);
     $f3->set('stateList', $stateList);
-
+    
+    /**
+     * Validate name fields(s) by checking if only alpha chars are used.
+     *
+     * @param string $name The name field input
+     * @return boolean
+     */
 	function validName($name)
 	{
 		return ctype_alpha($name);
 	}
 
+    /**
+    * Validate age field(s) by checking if age > 18
+    *
+    * @param int $age The age to be checked
+    * @return boolean
+    */
 	function validAge($age)
 	{
 		return (ctype_digit($age) && $age >= 18);
 	}
 
+    /**
+    * Validate phone numbers by checking for the US pattern
+    *
+    * @param string $phone The phone number to be checked
+    * @return boolean
+    */
 	function validPhone($phone)
 	{
 		$regex = "/^(\d[\s-]?)?[\(\[\s-]{0,2}?\d{3}[\)\]\s-]{0,2}?\d{3}[\s-]?\d{4}$/i";
 		return preg_match($regex, $phone);
 	}
 
+    /**
+     * Validate outdoor intrests to stored accepted values for outdoor intrests
+     * 
+     * @param string[] $intrests The outdoor intrests to validate
+     * @return boolean
+     */
 	function validOutdoor($intrests)
 	{
         $outdoorIntrests = array('hiking', 'walking', 'biking', 'climbing', 'swimming', 'collecting');
@@ -101,6 +125,12 @@
 		return true;
 	}
 
+    /**
+     * Validate indoor intrests to stored accepted values for indoor intrests
+     * 
+     * @param string[] $intrests The indoor intrests to validate
+     * @return boolean
+     */
 	function validIndoor($intrests)
 	{
         $indoorIntrests = array('tv', 'puzzles', 'movies', 'reading', 'cooking', 'playing cards', 'board games', 'video games');
