@@ -1,5 +1,9 @@
 <?php
-
+    /*
+     * This file contains the validation functions and varuables used by the sign up form.
+     * Quentin Guenther
+     * 2/2/2018
+     */
 	$indoorIntrests = array('tv', 'puzzles', 'movies', 'reading', 'cooking', 'playing cards', 'board games', 'video games');
 	$outdoorIntrests = array('hiking', 'walking', 'biking', 'climbing', 'swimming', 'collecting');
 	$stateList = array(
