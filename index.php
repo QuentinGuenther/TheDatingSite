@@ -50,11 +50,12 @@
             // if no errors then set session varuables and re route to next form
             $errors = array_filter($errors);
             if(empty($errors)) { 
-                $_SESSION['firstName'] = $firstName;
-                $_SESSION['lastName'] = $lastName;
-                $_SESSION['age'] = $age;
-                $_SESSION['gender'] = $gender;
-                $_SESSION['phoneNumber'] = $phoneNumber;
+                if(isset($_POST['premium'])) {
+                    $_SESSION['member'] = new PremiumMember($firstName, $lastName, $age, $gender, $phoneNumber);
+                } else {
+                    $_SESSION['member'] = new Member($firstName, $lastName, $age, $gender, $phoneNumber);
+                }
+                
                 $f3->reroute('/signup/profile'); 
             }
 
@@ -93,7 +94,7 @@
             $f3->reroute('/signup/interests');
         }
        
-        
+        print_r($_SESSION);
         echo Template::instance()->render('pages/profile.html');
         
     });

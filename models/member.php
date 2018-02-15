@@ -79,7 +79,7 @@
 		 */
 		public function setLname($lname)
 		{
-			$this->lname = $lname
+			$this->lname = $lname;
 		}
 
 		/**
