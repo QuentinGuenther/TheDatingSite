@@ -4,7 +4,7 @@
 	 * The member class represents a member of the dating site.
 	 * 
 	 * The member class represents a member of the dating site with a name,
-	 * age, gender, phone number, email, state, seeking gender, and bio.
+	 * age, gender, phone number, email, state, seeking gender, bio, and profile image directory.
 	 *
 	 * @author Quentin Guenther <qguenther@mail.greenriver.edu>
 	 * @copyright 2018
@@ -20,6 +20,7 @@
 		protected $state;
 		protected $seeking;
 		protected $bio;
+		protected $profileImageDir;
 
 		/**
 		 * Function that instantiates a member.
@@ -38,6 +39,7 @@
 			$this->age = $age;
 			$this->gender = $gender;
 			$this->phone = $phone;
+			$this->profileImageDir = 'images/profile_image.jpg';
 		}
 
 		/**
@@ -227,5 +229,13 @@
 		public function setBio($bio) 
 		{
 			$this->bio = $bio;
+		}
+
+		public function getProfileImageDir() {
+			return $this->profileImageDir;
+		}
+
+		public function setProfileImageDir($dir) {
+			$this->profileImageDir = $dir;
 		}
 	}

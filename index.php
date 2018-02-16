@@ -72,16 +72,17 @@
                                          $_POST['gender'],
                                          $_POST['phoneNumber']);
 
-                $_SESSION['member'] = $member;
-
                 if($_FILES['profileImage']['error'] != '4') {
 
                     if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $targetFile)) {
+                        $member->setProfileImageDir($targetFile);
+                        $_SESSION['member'] = $member;
                         $f3->reroute('/signup/profile');
                     } else {
                         $fileErrors['type'] = $targetFile;
                     }
                 } else {
+                    $_SESSION['member'] = $member;
                     $f3->reroute('/signup/profile');
                 }
                 

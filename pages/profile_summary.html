@@ -37,20 +37,22 @@
                         <li class="list-group-item">Seeking: {{ $_SESSION['member']->getSeeking() }}</li>
                         <li class="list-group-item">
                             <span>Intrests:</span>
-                            <span>
-                                <repeat group="{{ $_SESSION['member']->getIndoorIntrests() }}" value="{{ @value }}">
-                                    {{ @value }}
-                                </repeat>
-                                <repeat group="{{ $_SESSION['member']->getOutdoorIntrests() }}" value="{{ @value }}">
-                                    {{ @value }}
-                                </repeat>
-                            </span>
+                            <check if="$_SESSION['member'] instanceof PremiumMember">
+                                <span>
+                                    <repeat group="{{ $_SESSION['member']->getIndoorIntrests() }}" value="{{ @value }}">
+                                        {{ @value }}
+                                    </repeat>
+                                    <repeat group="{{ $_SESSION['member']->getOutdoorIntrests() }}" value="{{ @value }}">
+                                        {{ @value }}
+                                    </repeat>
+                                </span>
+                            </check>
                         </li>
                     </ul>
                 </div> <!-- /Card -->
             </div> <!-- /col -->
             <div class="col-md-6">
-                <img src="images/profile_image.jpg" class="img-fluid" alt="Profile Image" />
+                <img src="{{ $_SESSION['member']->getProfileImageDir() }}" class="img-fluid" alt="Profile Image" />
                 <h2 class="h5">Biography</h2>
                 <p class="text-center">{{ $_SESSION['member']->getBio() }}</p>
             </div>
