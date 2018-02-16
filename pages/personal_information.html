@@ -24,7 +24,7 @@
                 <hr />
             </div>
         </div> <!-- row -->
-        <form class="row" action="#" method="POST">
+        <form class="row" action="#" method="POST" enctype="multipart/form-data">
             <div class="col-md-8">
                 <!-- First Name -->
                 <div class="form-group">
@@ -93,12 +93,19 @@
                         </div>
                     </check>
                 </div> <!-- /Phone Number -->
-                <p><strong>Premium Membership</strong></p>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="premium" id="premium">
-                    <label class="form-check-label" for="premium">Sign me up for a Premium Account!</label>
+                <!-- Image Upload -->
+                <div class="form-group">
+                    <label for="profileImage"><strong>Profile Image</strong></label>
+                    <input type="file" class="form-control-file" name="profileImage" id="profileImage">
+                </div><!-- /Image Upload -->
+                <!-- Premium Membership -->
+                <div class="form-group">
+                    <p><strong>Premium Membership</strong></p>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="premium" id="premium">
+                        <label class="form-check-label" for="premium">Sign me up for a Premium Account!</label>
+                    </div>
                 </div>
-
             </div>
             <div class="col-md-4">
                 <div class="info-box text-center">
