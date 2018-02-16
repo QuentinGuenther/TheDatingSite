@@ -28,20 +28,20 @@
             <div class="col-md-6">
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Name: {{ $_SESSION['firstName'] }} {{ $_SESSION['lastName'] }}</li>
-                        <li class="list-group-item">Gender: {{ $_SESSION['gender'] }}</li>
-                        <li class="list-group-item">Age: {{ $_SESSION['age'] }}</li>
-                        <li class="list-group-item">Phone: {{ $_SESSION['phoneNumber'] }}</li>
-                        <li class="list-group-item">Email: {{ $_SESSION['email'] }}</li>
-                        <li class="list-group-item">State: {{ $_SESSION['state'] }}</li>
-                        <li class="list-group-item">Seeking: {{ $_SESSION['seekingGender'] }}</li>
+                        <li class="list-group-item">Name: {{ $_SESSION['member']->getFname() }} {{ $_SESSION['member']->getLname() }}</li>
+                        <li class="list-group-item">Gender: {{ $_SESSION['member']->getGender() }}</li>
+                        <li class="list-group-item">Age: {{ $_SESSION['member']->getAge() }}</li>
+                        <li class="list-group-item">Phone: {{ $_SESSION['member']->getPhone() }}</li>
+                        <li class="list-group-item">Email: {{ $_SESSION['member']->getEmail() }}</li>
+                        <li class="list-group-item">State: {{ $_SESSION['member']->getState() }}</li>
+                        <li class="list-group-item">Seeking: {{ $_SESSION['member']->getSeeking() }}</li>
                         <li class="list-group-item">
                             <span>Intrests:</span>
                             <span>
-                                <repeat group="{{ $_SESSION['indoor'] }}" value="{{ @value }}">
+                                <repeat group="{{ $_SESSION['member']->getIndoorIntrests() }}" value="{{ @value }}">
                                     {{ @value }}
                                 </repeat>
-                                <repeat group="{{ $_SESSION['outdoor'] }}" value="{{ @value }}">
+                                <repeat group="{{ $_SESSION['member']->getOutdoorIntrests() }}" value="{{ @value }}">
                                     {{ @value }}
                                 </repeat>
                             </span>
@@ -52,7 +52,7 @@
             <div class="col-md-6">
                 <img src="images/profile_image.jpg" class="img-fluid" alt="Profile Image" />
                 <h2 class="h5">Biography</h2>
-                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias officiis assumenda officia quibusdam deleniti eos cupiditate dolore doloribus!</p>
+                <p class="text-center">{{ $_SESSION['member']->getBio() }}</p>
             </div>
         </div> <!-- /row -->
         <div class="row">

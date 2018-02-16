@@ -131,7 +131,7 @@
 		 */
 		public function getPhone() 
 		{
-			return $this->fname;
+			return $this->phone;
 		}
 
 		/**
