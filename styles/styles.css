@@ -19,3 +19,7 @@ nav {
 	font-style: italic;
 	font-size: 0.85rem;
 }
+
+.profile-image {
+    min-width: 100%;
+}
