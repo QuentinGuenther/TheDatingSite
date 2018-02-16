@@ -27,7 +27,7 @@
 		 */
 		public function getIndoorIntrests()
 		{
-			return $this->_inDoorInterests;
+			return $this->inDoorInterests;
 		}
 
 		/**
@@ -38,7 +38,7 @@
 		 */
 		public function setIndoorIntrests($intrests)
 		{
-			$this->_inDoorInterests = $intrests;
+			$this->inDoorInterests = $intrests;
 		}
 
 		/**
@@ -48,7 +48,7 @@
 		 */
 		public function getOutdoorIntrests()
 		{
-			return $this->_outDoorInterests;
+			return $this->outDoorInterests;
 		}
 
 		/**
@@ -59,6 +59,6 @@
 		 */
 		public function setOutdoorIntrests($intrests)
 		{
-			$this->_outDoorInterests = $intrests;
+			$this->outDoorInterests = $intrests;
 		}
 	}

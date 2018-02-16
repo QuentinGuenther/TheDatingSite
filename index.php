@@ -5,7 +5,6 @@
      * Quentin Guenther
      * 2/2/2018
      */
-    session_start();
 
     // Turn on error reporting
     error_reporting(E_ALL);
@@ -13,6 +12,8 @@
 
     // Require autoload
     require_once('vendor/autoload.php');
+
+    session_start();
 
     // Create fat-free instance
     $f3 = Base::instance();
@@ -31,40 +32,44 @@
     // Sign up route
     $f3->route('GET|POST /signup/personal_information', function($f3){
         if(isset($_POST['submit'])) {
-            // set post data to varuables
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
-            $age = $_POST['age'];
-            $gender = $_POST['gender'];
-            $phoneNumber = $_POST['phoneNumber'];
+            $member = null;
 
             // create array to store errors
             $errors = array();
 
             // validate form data
-            if(!validName($firstName)) { $errors['firstName'] = "First name must contain alphabetic charactors only."; }
-            if(!validName($lastName)) { $errors['lastName'] = "Last name must contain alphabetic charactors only."; }
-            if(!validAge($age)) { $errors['age'] = "You must be atleast 18 years old to join."; }
-            if(!validPhone($phoneNumber)) { $errors['phoneNumber'] = "Must be a valid phone number."; }
+            if(!validName($_POST['firstName'])) { $errors['firstName'] = "First name must contain alphabetic charactors only."; }
+            if(!validName($_POST['lastName'])) { $errors['lastName'] = "Last name must contain alphabetic charactors only."; }
+            if(!validAge($_POST['age'])) { $errors['age'] = "You must be atleast 18 years old to join."; }
+            if(!validPhone($_POST['phoneNumber'])) { $errors['phoneNumber'] = "Must be a valid phone number."; }
 
             // if no errors then set session varuables and re route to next form
             $errors = array_filter($errors);
             if(empty($errors)) { 
-                if(isset($_POST['premium'])) {
-                    $_SESSION['member'] = new PremiumMember($firstName, $lastName, $age, $gender, $phoneNumber);
-                } else {
-                    $_SESSION['member'] = new Member($firstName, $lastName, $age, $gender, $phoneNumber);
-                }
+                if(isset($_POST['premium']))
+                    $member = new PremiumMember($_POST['firstName'], 
+                                                $_POST['lastName'],
+                                                $_POST['age'],
+                                                $_POST['gender'],
+                                                $_POST['phoneNumber']);
+                else 
+                    $member = new Member($_POST['firstName'], 
+                                         $_POST['lastName'],
+                                         $_POST['age'],
+                                         $_POST['gender'],
+                                         $_POST['phoneNumber']);
+
+                $_SESSION['member'] = $member;
                 
                 $f3->reroute('/signup/profile'); 
             }
 
             // set $f3 varuables to be used for sticky forms
-            $f3->set('firstName', $firstName);
-            $f3->set('lastName', $lastName);
-            $f3->set('age', $age);
-            $f3->set('gender', $gender);
-            $f3->set('phoneNumber', $phoneNumber);
+            $f3->set('firstName', $_POST['firstName']);
+            $f3->set('lastName', $_POST['lastName']);
+            $f3->set('age', $_POST['age']);
+            $f3->set('gender', $_POST['gender']);
+            $f3->set('phoneNumber', $_POST['phoneNumber']);
             $f3->set('errors', $errors);
         }
 
@@ -73,57 +78,58 @@
 
     $f3->route('GET|POST /signup/profile', function($f3){
         if(isset($_POST['submit'])) {
-            // set post data to varuables
-            $email = $_POST['email'];
-            $state = $_POST['state'];
-            $seekingGender = $_POST['seekingGender'];
-            $biography = $_POST['biography'];
-
             // set $f3 varuables to be used for sticky forms
-            $f3->set('email', $email);
-            $f3->set('state', $state);
-            $f3->set('seekingGender', $seekingGender);
-            $f3->set('biography', $biography);
+            $f3->set('email', $_POST['email']);
+            $f3->set('state', $_POST['state']);
+            $f3->set('seekingGender', $_POST['seekingGender']);
+            $f3->set('biography', $_POST['biography']);
 
-            // set session varuables
-            $_SESSION['email'] = $email;
-            $_SESSION['state'] = $state;
-            $_SESSION['seekingGender'] = $seekingGender;
-            $_SESSION['biography'] = $biography;
+            // get member from session, then update values
+            $member = $_SESSION['member'];
+            $member->setEmail($_POST['email']);
+            $member->setState($_POST['state']);
+            $member->setBio($_POST['biography']);
+            $member->setSeeking($_POST['seekingGender']);
 
-            $f3->reroute('/signup/interests');
+            // update session member
+            $_SESSION['member'] = $member; 
+
+            if($member instanceof PremiumMember) {
+                $f3->reroute('/signup/interests');
+            } else {
+                $f3->reroute('/profile'); 
+            }
         }
-       
-        print_r($_SESSION);
+
         echo Template::instance()->render('pages/profile.html');
-        
     });
 
     $f3->route('GET|POST /signup/interests', function($f3){
         if(isset($_POST['submit'])) {
-            // set post data to varuables
-            $indoor = $_POST['indoor'];
-            $outdoor = $_POST['outdoor'];
-
             // create array to store errors
             $errors = array();
 
             // validate form data
-            if(!validIndoor($indoor)) { $errors['indoor'] = 'All of your indoor intrests could not be found.'; }
+            if(!validIndoor($_POST['indoor'])) { $errors['indoor'] = 'All of your indoor intrests could not be found.'; }
             if(!validOutdoor($outdoor)) { $errors['outdoor'] = 'All of your outdoor intrests could not be found.'; }
 
             // if no errors then set session varuables and re route to next form
             $errors = array_filter($errors);
             if(empty($errors)) { 
-                $_SESSION['indoor'] = $indoor;
-                $_SESSION['outdoor'] = $outdoor;
+                $member = $_SESSION['member'];
+                if($member instanceof PremiumMember) {
+                    $member->setIndoorIntrests($_POST['indoor']);
+                    $member->setOutdoorIntrests($_POST['outdoor']);
+                }
+
+                $_SESSION['member'] = $member;
 
                 $f3->reroute('/profile'); 
             }
 
             // set $f3 varuables to be used for sticky forms
-            $f3->set('setIndoorIntrests', $indoor);
-            $f3->set('setOutdoorIntrests', $outdoor);
+            $f3->set('setIndoorIntrests', $_POST['indoor']);
+            $f3->set('setOutdoorIntrests', $_POST['outdoor']);
             $f3->set('errors', $errors);
         }
 

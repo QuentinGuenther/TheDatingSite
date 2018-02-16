@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>The Dating Website - Sign Up</title>
+
+    <!-- Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+
+    <link href="styles/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-light mb-2">
+        <a class="navbar-brand" href="/"><strong>My Dating Website</strong></a>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Profile</h1>
+                <hr />
+            </div>
+        </div> <!-- row -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Name: {{ @firstName }} {{ @lastName }}</li>
+                        <li class="list-group-item">Gender: {{ @gender }}</li>
+                        <li class="list-group-item">Age: {{ @age }}</li>
+                        <li class="list-group-item">Phone: {{ @phone }}</li>
+                        <li class="list-group-item">Email: {{ @email }}</li>
+                        <li class="list-group-item">State: {{ @state }}</li>
+                        <li class="list-group-item">Seeking: {{ @seekingGender }}</li>
+                        <li class="list-group-item">Intrests:<repeat group="{{ @intrests }}" value=" {{ @item }}">
+                            <span> {{ @item }}</span>
+                        </repeat></li>
+                    </ul>
+                </div> <!-- /Card -->
+            </div> <!-- /Col -->
+            <div class="col-md-6">
+                <img class="img-fluid" src="../images/profile.png" alt="Profile Image">
+            </div>
+        </div> <!-- /Row -->
+    </div>
+
+    <!-- Bootstrap Javascrpts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+</body>
+</html>
