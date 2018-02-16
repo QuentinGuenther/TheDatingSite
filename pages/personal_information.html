@@ -97,6 +97,11 @@
                 <div class="form-group">
                     <label for="profileImage"><strong>Profile Image</strong></label>
                     <input type="file" class="form-control-file" name="profileImage" id="profileImage">
+                    <repeat group="{{ @fileErrors }}" value="{{ @value }}">
+                        <div class="invalid-input">
+                            <p>{{ @value }}</p>
+                        </div>
+                    </repeat>
                 </div><!-- /Image Upload -->
                 <!-- Premium Membership -->
                 <div class="form-group">

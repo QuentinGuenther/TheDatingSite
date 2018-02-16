@@ -43,9 +43,22 @@
             if(!validAge($_POST['age'])) { $errors['age'] = "You must be atleast 18 years old to join."; }
             if(!validPhone($_POST['phoneNumber'])) { $errors['phoneNumber'] = "Must be a valid phone number."; }
 
+            if($_FILES['profileImage']['error'] != '4') {
+                include('models/file_validation.php');
+                $fileErrors = array();
+                $targetDir = 'uploads/';
+                $targetFile = $targetDir . basename($_FILES['profileImage']['name']);
+
+                // validate file
+                if(!checkFileExists($targetFile)) { $fileErrors['exists'] = 'That file already exists.'; }
+                if(!checkFileSize($targetFileSize, 500000)) { $fileErrors['size'] = 'That file is too large.'; }
+                if(!checkFileType($targetFile)) { $fileErrors['type'] = 'That file is the wrong type.'; }
+            }
+
+
             // if no errors then set session varuables and re route to next form
             $errors = array_filter($errors);
-            if(empty($errors)) { 
+            if(empty($errors) && empty($fileErrors)) { 
                 if(isset($_POST['premium']))
                     $member = new PremiumMember($_POST['firstName'], 
                                                 $_POST['lastName'],
@@ -60,8 +73,18 @@
                                          $_POST['phoneNumber']);
 
                 $_SESSION['member'] = $member;
+
+                if($_FILES['profileImage']['error'] != '4') {
+
+                    if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $targetFile)) {
+                        $f3->reroute('/signup/profile');
+                    } else {
+                        $fileErrors['type'] = $targetFile;
+                    }
+                } else {
+                    $f3->reroute('/signup/profile');
+                }
                 
-                $f3->reroute('/signup/profile'); 
             }
 
             // set $f3 varuables to be used for sticky forms
@@ -71,6 +94,7 @@
             $f3->set('gender', $_POST['gender']);
             $f3->set('phoneNumber', $_POST['phoneNumber']);
             $f3->set('errors', $errors);
+            $f3->set('fileErrors', $fileErrors);
         }
 
         echo Template::instance()->render('pages/personal_information.html');
