@@ -61,4 +61,15 @@
 		{
 			$this->outDoorInterests = $intrests;
 		}
+
+		/**
+		 * Function that returns a string of indoor and outdoor intrests
+		 * 
+		 * @return string List of members intrests.
+		 */
+		public function getIntrests() 
+		{
+			$intrests = array_merge($this->inDoorInterests, $this->outDoorInterests);
+			return implode(', ', $intrests);
+		}
 	}

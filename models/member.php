@@ -54,13 +54,15 @@
 
 		/**
 		 * Function that sets the member's first name.
-		 *
+		 * The name must be <= 50 characters.
+		 * 
 		 * @param string $fname The member's first name.
 		 * @return void
 		 */
 		public function setFname($fname) 
 		{
-			$this->fname = $fname;
+			if(strlen($fname <= 50))
+				$this->fname = $fname;
 		}
 
 		/**
@@ -75,13 +77,15 @@
 
 		/**
 		 * Function that sets the member's last name.
+		 * The name must be <= 50 characters.
 		 *
 		 * @param string $lname The member's last name.
 		 * @return void
 		 */
 		public function setLname($lname)
 		{
-			$this->lname = $lname;
+			if(strlen($fname <= 50))
+				$this->lname = $lname;
 		}
 
 		/**
@@ -96,13 +100,15 @@
 
 		/**
 		 * Function that sets the member's age.
+		 * Age must be less than 127
 		 *
 		 * @param int $age The member's age.
 		 * @return void
 		 */
 		public function setAge($age) 
 		{
-			$this->age = $age;
+			if(age > 0 && age <= 127)
+				$this->age = $age;
 		}
 
 		/**
@@ -138,13 +144,17 @@
 
 		/**
 		 * Function that sets the member's phone number.
+		 * Phone number must be less than 11 numbers.
 		 *
 		 * @param string $phone The member's phone number.
 		 * @return void
 		 */
 		public function setPhone($phone) 
 		{
-			$this->phone = $phone;
+			$phone = preg_replace("/[^0-9]/i", "", $phone);
+
+			if(strlen($phone) <= 11)
+				$this->phone = $phone;
 		}
 
 		/**
@@ -159,13 +169,15 @@
 
 		/**
 		 * Function that sets the member's email.
+		 * Email must be <= 255 characters.
 		 *
 		 * @param string $email The member's email.
 		 * @return void
 		 */
 		public function setEmail($email) 
 		{
-			$this->email = $email;
+			if(strlen($email) <= 255)
+				$this->email = $email;
 		}
 
 		/**

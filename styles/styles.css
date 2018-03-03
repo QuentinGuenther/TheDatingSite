@@ -22,4 +22,5 @@ nav {
 
 .profile-image {
     min-width: 100%;
+    max-width: 100%;
 }

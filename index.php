@@ -24,6 +24,8 @@
     // Validation script
     include('models/validation.php');
 
+    new Database();
+
     // Default route
     $f3->route('GET /', function(){
         echo Template::instance()->render('pages/home.html');
@@ -122,7 +124,7 @@
             if($member instanceof PremiumMember) {
                 $f3->reroute('/signup/interests');
             } else {
-                $f3->reroute('/profile'); 
+                $f3->reroute('/signup/submit'); 
             }
         }
 
@@ -149,7 +151,7 @@
 
                 $_SESSION['member'] = $member;
 
-                $f3->reroute('/profile'); 
+                $f3->reroute('/signup/submit'); 
             }
 
             // set $f3 varuables to be used for sticky forms
@@ -161,9 +163,31 @@
         echo Template::instance()->render('pages/interests.html');
     });
 
-    // The profile summary page that shows data entered from previous forms
-    $f3->route('GET /profile', function($f3){
-       echo Template::instance()->render('pages/profile_summary.html');
+    $f3->route('GET /signup/submit', function($f3) {
+        if(isset($_SESSION['member'])) {
+            $id = Database::addMember($_SESSION['member']);
+            unset($_SESSION['member']);
+            $f3->reroute("/profile/$id");
+        }
+        echo "Error: You should have signed up to be here...?";
+    });
+
+    // The profile summary page that shows data entered for a member
+    $f3->route('GET /profile/@userID', function($f3, $params) {
+        $member = Database::getMember($params['userID']);
+
+        $f3->set('member', $member[0]);
+
+        echo Template::instance()->render('pages/profile_summary.html');    
+    });
+
+    // Admin page that shows all members
+    $f3->route('GET /admin', function($f3) {
+        $members = Database::getMembers();
+
+        $f3->set('members', $members);
+
+        echo Template::instance()->render('pages/admin.html');
     });
 
     // Error page

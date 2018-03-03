@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
 
-    <link href="styles/styles.css" rel="stylesheet" />
+    <link href="../styles/styles.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-light mb-2">
         <a class="navbar-brand" href="/"><strong>My Dating Website</strong></a>
+        <a class="btn btn-secondary text-right" href="/IT328/TheDatingSite/admin"><strong>Admin Page</strong></a>
     </nav>
     <div class="container">
         <div class="row">
@@ -28,33 +29,23 @@
             <div class="col-md-6">
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Name: {{ $_SESSION['member']->getFname() }} {{ $_SESSION['member']->getLname() }}</li>
-                        <li class="list-group-item">Gender: {{ $_SESSION['member']->getGender() }}</li>
-                        <li class="list-group-item">Age: {{ $_SESSION['member']->getAge() }}</li>
-                        <li class="list-group-item">Phone: {{ $_SESSION['member']->getPhone() }}</li>
-                        <li class="list-group-item">Email: {{ $_SESSION['member']->getEmail() }}</li>
-                        <li class="list-group-item">State: {{ $_SESSION['member']->getState() }}</li>
-                        <li class="list-group-item">Seeking: {{ $_SESSION['member']->getSeeking() }}</li>
-                        <li class="list-group-item">
-                            <span>Intrests:</span>
-                            <check if="$_SESSION['member'] instanceof PremiumMember">
-                                <span>
-                                    <repeat group="{{ $_SESSION['member']->getIndoorIntrests() }}" value="{{ @value }}">
-                                        {{ @value }}
-                                    </repeat>
-                                    <repeat group="{{ $_SESSION['member']->getOutdoorIntrests() }}" value="{{ @value }}">
-                                        {{ @value }}
-                                    </repeat>
-                                </span>
-                            </check>
-                        </li>
+                        <li class="list-group-item">Name: {{ @member['fname'] }} {{ @member['lname'] }}</li>
+                        <li class="list-group-item">Gender: {{ @member['gender'] }}</li>
+                        <li class="list-group-item">Age: {{ @member['age'] }}</li>
+                        <li class="list-group-item">Phone: {{ @member['phone'] }}</li>
+                        <li class="list-group-item">Email: {{ @member['email'] }}</li>
+                        <li class="list-group-item">State: {{ @member['state'] }}</li>
+                        <li class="list-group-item">Seeking: {{ @member['seeking'] }}</li>
+                        <check if="{{ @member['premium'] == 1 }}">
+                            <li class="list-group-item">Intrests: {{ @member['interests'] }}</li>
+                        </check>
                     </ul>
                 </div> <!-- /Card -->
             </div> <!-- /col -->
             <div class="col-md-6">
-                <img src="{{ $_SESSION['member']->getProfileImageDir() }}" class="profile-image" alt="Profile Image" />
+                <img src="../{{ @member['image'] }}" class="profile-image" alt="Profile Image" />
                 <h2 class="h5 text-center">Biography</h2>
-                <p class="text-center">{{ $_SESSION['member']->getBio() }}</p>
+                <p class="text-center">{{ @member['bio'] }}</p>
             </div>
         </div> <!-- /row -->
         <div class="row">
